@@ -23,9 +23,10 @@ class UserServices
     public function createUserService($request)
     {
         $data = $request->all();
+        // dd($data);
         $validate = Validator::make($data, [
             'name' => 'required|max:100|string',
-            'password' => 'string|min:8',
+            'password' => 'string|min:8|required',
             'email' => 'required|email|unique:users',
             'role_id' => 'required|integer|exists:roles,id'
         ]);
@@ -56,6 +57,12 @@ class UserServices
         return response()
             ->json(['success' => true, 'message' => 'User created successfully', 'data' => $user], 201)
             ->cookie('auth_token', $token);
+    }
+
+    public function getAllUsersService(){
+        $users = User::all();
+
+        return $users;
     }
 }
 

@@ -22,4 +22,8 @@ class UserController
     {
         return $this->userServices->createUserService($request);
     }
+
+    public function getAllUsers(){
+        return $this->userServices->getAllUsersService();
+    }
 }
